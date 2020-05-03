@@ -14,7 +14,7 @@
           <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of cart">
             <div>
               <h6 class="my-0">{{item.name}}</h6>
-              <small class="text-muted">{{item.description}}</small>
+              <small class="text-muted">{{item.description | truncate: ['140', '...']}}</small>
             </div>
             <span class="text-muted">{{item.price | currency}}</span>
           </li>
@@ -91,6 +91,7 @@
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" [disabled]="!checkoutForm.valid" type="submit">Place Order</button>
         </form>
+        <div id="snackbar"></div>
       </div>
     </div>
     <ng-template #noItemsInCart>

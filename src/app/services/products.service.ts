@@ -26,9 +26,11 @@ export class ProductsService {
   getProducts() {
     return this.productsSub.asObservable();
   }
+
   getCart() {
     return this.cartSub.asObservable();
   }
+
   addToCart(id) {
     const product = this.findItemInProducts(id);
     if (product.length !== 0) {
@@ -40,6 +42,7 @@ export class ProductsService {
       this.cartSub.next([...this._cart]);
     }
   }
+
   removeFromCart(id) {
       if (this.findItemInCart(id).length) {
         const item = this.findItemInCart(id)[0];
@@ -48,12 +51,22 @@ export class ProductsService {
       }
       this.cartSub.next([...this._cart]);
   }
+
+  clearCart() {
+    this.cartSub.next([]);
+}
+
   findItemInCart(id) {
     const item = this._cart.filter(product => product._id === id);
     return item;
   }
+
   findItemInProducts(id) {
     const item = this._products.filter(product => product._id === id);
     return item;
+  }
+
+  checkout(data) {
+    return this.http.post('/api/checkout', data);
   }
 }
