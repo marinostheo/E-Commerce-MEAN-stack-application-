@@ -20,7 +20,7 @@ export class OrderComponent implements OnInit {
     return orders.reduce((acc, cur) => acc + cur.items.length, 0);
   }
   orderTotal(items) {
-    return items.reduce((acc, cur) => acc + cur.price, 0);
+    return items.reduce((acc, cur) => acc + Number(cur.price), 0);
   }
 
 }
